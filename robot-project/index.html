@@ -1,0 +1,212 @@
+<html>
+	<head>
+	</head>
+
+	<style>
+		body {
+			background-color: "#666";
+		}
+		.btnMoveControls {
+			height: 75px; 
+			width: 75px
+		}
+		.btnSpeedControls {
+			height: 50px; 
+			width: 50px; 
+			font-size: 18px
+		}
+		.btnCameraControls {
+			height: 50px; 
+			width: 100px; 
+			font-size: 25px
+		}
+	</style>
+
+	<body>
+		<div style="text-align:center">
+			<h1>RPI Robot Web-Control</h1>
+
+			<!-- the camera stream -->
+			<iframe src="http://[RPI-SERVER-IP-ADRESS]:9000/stream.html" frameborder="0" align="middle" width="640" height="480" align="middle" scrolling="no"></iframe>
+			<br><br>
+
+
+			<!-- Light controls -->
+			<button style="height: 50px; width: 100px" onclick="lighton()">Light On</button>
+			<img hspace="20" style="padding-left: 200px">
+			<button style="height: 50px; width: 100px" onclick="lightoff()">Light Off</button>
+			<br></br>
+
+			<span style="display:inline-block;padding:5px;border:1px solid #000; font-size: 140%;font-weight: bold;">
+
+				<!-- Move controls -->
+				<br>
+				<p>Move controls</p>
+				<button class="btnMoveControls" onclick="forward()">Forward</button>
+				<br><br><br><br>
+				<img hspace="10" style="padding-left: 5px">
+				<button class="btnMoveControls" onclick="left()">Left</button>
+				<img hspace="20" style="padding-left: 10px">
+				<button class="btnMoveControls" onclick="stop()">Stop</button>
+				<img hspace="20" style="padding-left: 10px">
+				<button class="btnMoveControls" onclick="right()">Right</button>
+				<img hspace="10" style="padding-left: 5px">
+				<br><br><br><br>
+				<button class="btnMoveControls" onclick="reverse()">Down</button>
+				<br><br><br>
+
+				<!-- Speed controls -->
+				<p>Speed controls (in percent)</p>
+				<img hspace="30" style="padding-left: 5px">
+				<button class="btnSpeedControls" onclick="nospeed()">0</button>
+				<img hspace="30" style="padding-left: 20px">
+				<button class="btnSpeedControls" onclick="lowspeed()">25</button>
+				<img hspace="30" style="padding-left: 20px">
+				<button class="btnSpeedControls" onclick="regularspeed()">50</button>
+				<img hspace="30" style="padding-left: 20px">
+				<button class="btnSpeedControls" onclick="highspeed()">100</button>
+				<img hspace="30" style="padding-left: 5px">
+				<br><br>
+			</span>
+			<br><br>
+
+			<span style="display:inline-block;padding:5px;border:1px solid #000; font-size: 140%;font-weight: bold;">
+						
+				
+					<!-- Camera controls -->
+					<p>Camera Controls</p>
+					<img hspace="18" style="padding-left: 5px">
+					<button class="btnCameraControls" onclick="downtilt()">-D</button>
+					<button class="btnCameraControls" onclick="downcentertilt()">D</button>
+					<button class="btnCameraControls" onclick="centertilt()">0</button>
+					<button class="btnCameraControls" onclick="upcentertilt()">U</button>
+					<button class="btnCameraControls" onclick="uptilt()">U+</button>
+					<img hspace="18" style="padding-left: 5px">
+					<br><br>
+					<button class="btnCameraControls" onclick="leftpan()">+L</button>
+					<button class="btnCameraControls" onclick="leftCenterPan()">L</button>
+					<button class="btnCameraControls" onclick="centerpan()">0</button>
+					<button class="btnCameraControls" onclick="rightCenterPan()">R</button>
+					<button class="btnCameraControls" onclick="rightpan()">R+</button>
+					<br><br>
+			</span>
+
+			<script>
+				var xmlhttp = new XMLHttpRequest();
+
+				// light controls
+				function lighton() {
+						xmlhttp.open("GET", "cgi-bin/lighton.cgi",true);
+						xmlhttp.send();
+				}
+
+				function lightoff() {
+						xmlhttp.open("GET", "cgi-bin/lightoff.cgi",true);
+						xmlhttp.send();
+				}
+
+
+				// movement controls
+				function forward() {
+					xmlhttp.open("GET",  "cgi-bin/forward.cgi",true);
+					xmlhttp.send();
+				}
+
+				function stop() {
+					xmlhttp.open("GET", "cgi-bin/stop.cgi",true);
+					xmlhttp.send();
+				}
+
+				function left() {
+					xmlhttp.open("GET", "cgi-bin/left.cgi",true);
+					xmlhttp.send();
+				}
+
+				function right() {
+					xmlhttp.open("GET", "cgi-bin/right.cgi",true);
+					xmlhttp.send();
+				}
+
+				function reverse() {
+					xmlhttp.open("GET", "cgi-bin/reverse.cgi",true);
+					xmlhttp.send();
+				}
+
+
+				// speed controls
+				function lowspeed() {
+					xmlhttp.open("GET", "cgi-bin/lowspeed.cgi",true);
+					xmlhttp.send();
+				}
+				
+				function regularspeed() {
+					xmlhttp.open("GET", "cgi-bin/regularspeed.cgi",true);
+					xmlhttp.send();
+				}
+
+				function highspeed() {
+					xmlhttp.open("GET", "cgi-bin/highspeed.cgi",true);
+					xmlhttp.send();
+				}
+
+				function nospeed() {
+					xmlhttp.open("GET", "cgi-bin/nospeed.cgi",true);
+					xmlhttp.send();
+				}
+
+
+				// camera movement controls
+				function downtilt() {
+					xmlhttp.open("GET", "cgi-bin/downtilt.cgi",true);
+					xmlhttp.send();
+				}
+
+				function downcentertilt() {
+					xmlhttp.open("GET", "cgi-bin/downcentertilt.cgi",true);
+					xmlhttp.send();
+				}
+
+				function centertilt() {
+					xmlhttp.open("GET", "cgi-bin/centertilt.cgi",true);
+					xmlhttp.send();
+				}
+
+				function upcentertilt() {
+					xmlhttp.open("GET", "cgi-bin/upcentertilt.cgi",true);
+					xmlhttp.send();
+				}
+
+				function uptilt() {
+					xmlhttp.open("GET", "cgi-bin/uptilt.cgi",true);
+					xmlhttp.send();
+				}
+
+				function leftpan() {
+					xmlhttp.open("GET", "cgi-bin/leftpan.cgi",true);
+					xmlhttp.send();
+				}
+
+				function leftCenterPan() {
+					xmlhttp.open("GET", "cgi-bin/leftCenterPan.cgi",true);
+					xmlhttp.send();
+				}
+
+				function centerpan() {
+					xmlhttp.open("GET", "cgi-bin/centerpan.cgi",true);
+					xmlhttp.send();
+				}
+
+				function rightCenterPan() {
+					xmlhttp.open("GET", "cgi-bin/rightCenterPan.cgi",true);
+					xmlhttp.send();
+				}
+
+				function rightpan() {
+					xmlhttp.open("GET", "cgi-bin/rightpan.cgi",true);
+					xmlhttp.send();
+				}			
+			</script>
+		</div>
+	</body>
+</html>
+
